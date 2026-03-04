@@ -4,9 +4,6 @@ Hides all ObjC method names, NSObject subclassing, and NSTimer boilerplate
 behind typed Python classes. Exports: TrayApp, MenuItem, MenuSeparator.
 """
 
-# pyright: reportAttributeAccessIssue=false
-# PyObjC generates AppKit/Foundation bindings at runtime, invisible to static analysis
-
 import queue
 from collections.abc import Callable
 from typing import Any, Self

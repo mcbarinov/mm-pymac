@@ -1,12 +1,12 @@
 [project]
 name = "mm-pymac"
-version = "0.0.1"
-description = "macOS utilities: tray/status bar apps and dialog notifications"
+version = "0.0.2"
+description = "macOS native utilities for Python"
 readme = "README.md"
 license = "MIT"
 authors = [{ name = "mcbarinov" }]
 requires-python = ">=3.14"
-dependencies = ["pyobjc-framework-Cocoa~=12.1"]
+dependencies = ["pyobjc-framework-Cocoa~=12.1", "pyobjc-framework-Quartz~=12.1"]
 
 [build-system]
 requires = ["hatchling"]
@@ -14,21 +14,20 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "bandit~=1.9.4",
     "pytest~=9.0.2",
     "pytest-xdist~=3.8.0",
-    "ruff~=0.15.2",
+    "ruff~=0.15.4",
     "pip-audit~=2.10.0",
-    "bandit~=1.9.3",
     "mypy~=1.19.1",
 ]
 
 [tool.mypy]
 python_version = "3.14"
 strict = true
-exclude = ["^tests/", "^tmp/"]
 
 [[tool.mypy.overrides]]
-module = ["AppKit", "Foundation", "PyObjCTools.*", "objc"]
+module = ["AppKit", "Foundation", "PyObjCTools.*", "Quartz", "objc"]
 ignore_missing_imports = true
 
 [tool.ruff]

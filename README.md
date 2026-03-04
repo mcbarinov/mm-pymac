@@ -1,6 +1,6 @@
 # mm-pymac
 
-macOS utilities for Python CLI apps: tray/status bar and alert dialogs.
+macOS native utilities for Python.
 
 ## Installation
 
@@ -38,4 +38,33 @@ result = show_alert(
 )
 if result == "OK":
     print("User confirmed")
+```
+
+### Lock Screen
+
+```python
+from mm_pymac import is_screen_locked
+
+locked = is_screen_locked()
+if locked is None:
+    print("Cannot determine lock state")
+elif locked:
+    print("Screen is locked")
+else:
+    print("Screen is unlocked")
+```
+
+#### Event subscription
+
+Subscribe to lock/unlock events (requires a running run loop, e.g. `TrayApp.run()`):
+
+```python
+from mm_pymac import on_screen_locked, on_screen_unlocked
+
+unsub_lock = on_screen_locked(lambda: print("Screen locked"))
+unsub_unlock = on_screen_unlocked(lambda: print("Screen unlocked"))
+
+# Later, to stop listening:
+unsub_lock()
+unsub_unlock()
 ```
