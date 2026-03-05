@@ -22,6 +22,9 @@ dev = [
     "mypy~=1.19.1",
 ]
 
+[tool.pytest.ini_options]
+addopts = "--dist loadgroup"
+
 [tool.mypy]
 python_version = "3.14"
 strict = true

@@ -54,6 +54,24 @@ else:
     print("Screen is unlocked")
 ```
 
+### Clipboard
+
+```python
+from mm_pymac import set_clipboard, get_clipboard, clear_clipboard
+
+# Copy text
+set_clipboard("Hello, world!")
+
+# Read text (returns None if clipboard has no text)
+text = get_clipboard()
+
+# Clear clipboard
+clear_clipboard()
+
+# Clear only if clipboard still contains the expected value
+clear_clipboard(expected="Hello, world!")
+```
+
 #### Event subscription
 
 Subscribe to lock/unlock events (requires a running run loop, e.g. `TrayApp.run()`):

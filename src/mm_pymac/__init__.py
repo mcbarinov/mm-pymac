@@ -1,5 +1,8 @@
 """macOS native utilities for Python."""
 
+from .clipboard import clear_clipboard as clear_clipboard
+from .clipboard import get_clipboard as get_clipboard
+from .clipboard import set_clipboard as set_clipboard
 from .dialog import DEFAULT_SOUND as DEFAULT_SOUND
 from .dialog import show_alert as show_alert
 from .lock_screen import is_screen_locked as is_screen_locked
