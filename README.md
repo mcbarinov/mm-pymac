@@ -54,6 +54,36 @@ else:
     print("Screen is unlocked")
 ```
 
+#### Event subscription
+
+Subscribe to lock/unlock events from a `TrayApp`. Requires a running NSRunLoop — `TrayApp.run()` provides it:
+
+```python
+from mm_pymac import TrayApp, on_screen_locked, on_screen_unlocked
+
+app = TrayApp(title="My App")
+on_screen_locked(lambda: print("Screen locked"))
+on_screen_unlocked(lambda: print("Screen unlocked"))
+app.run()
+```
+
+#### Polling watcher (no NSRunLoop required)
+
+Use `watch_screen_lock()` for scripts with their own main loop:
+
+```python
+from mm_pymac import watch_screen_lock
+
+stop = watch_screen_lock(
+    on_lock=lambda: print("Screen locked"),
+    on_unlock=lambda: print("Screen unlocked"),
+)
+
+# Your own main loop
+while True:
+    do_work()
+```
+
 ### Clipboard
 
 ```python
@@ -72,17 +102,9 @@ clear_clipboard()
 clear_clipboard(expected="Hello, world!")
 ```
 
-#### Event subscription
+## Examples
 
-Subscribe to lock/unlock events (requires a running run loop, e.g. `TrayApp.run()`):
+See the [`examples/`](examples/) folder for runnable scripts:
 
-```python
-from mm_pymac import on_screen_locked, on_screen_unlocked
-
-unsub_lock = on_screen_locked(lambda: print("Screen locked"))
-unsub_unlock = on_screen_unlocked(lambda: print("Screen unlocked"))
-
-# Later, to stop listening:
-unsub_lock()
-unsub_unlock()
-```
+- [`lock_events_cli.py`](examples/lock_events_cli.py) — CLI doing periodic work while lock/unlock events fire in the background
+- [`lock_events_tray.py`](examples/lock_events_tray.py) — TrayApp showing screen lock state in the menu bar

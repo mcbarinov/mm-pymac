@@ -1,6 +1,6 @@
 [project]
 name = "mm-pymac"
-version = "0.0.2"
+version = "0.0.3"
 description = "macOS native utilities for Python"
 readme = "README.md"
 license = "MIT"
